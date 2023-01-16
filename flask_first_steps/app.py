@@ -1,4 +1,9 @@
-from flask import Flask, request, jsonify
+"""This web-application was my first steps as web-development beginner.
+   This app is sort of online currency exchanger with local database(DB). There is
+   a few endpoints and functions that match them with a minimal for understanding
+   documentation and comments and also tools for testing as HTTP-request files."""
+
+from flask import Flask, request
 import json
 import sqlite3
 import datetime
@@ -8,6 +13,9 @@ app = Flask(__name__)
 current_date = datetime.date.today().strftime("%Y-%m-%d")
 
 
+# The line above exists for a few database queries where exact indication of today's date is necessary.
+
+
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
@@ -15,24 +23,26 @@ def dict_factory(cursor, row):
     return d
 
 
-def get_db_fetchall(querry: str):
+# Below you can see some functions for connection to database, sending queries and getting the result back.
+def get_db_fetchall(query: str):
     conn = sqlite3.connect('database_lite.db')
     conn.row_factory = dict_factory
-    cursor = conn.execute(querry)
+    cursor = conn.execute(query)
     result = cursor.fetchall()
     conn.commit()
     conn.close()
     return result
 
 
-def get_db_fetchone(querry: str):
+def get_db_fetchone(query: str):
     conn = sqlite3.connect('database_lite.db')
-    cursor = conn.execute(querry)
+    cursor = conn.execute(query)
     result = cursor.fetchone()
     conn.close()
     return result
 
 
+# Endpoints.
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
@@ -40,12 +50,15 @@ def hello_world():
 
 @app.get("/currency")
 def currencies():
+    # Getting all currencies from DB and returning in JSON format.
     res = get_db_fetchall(f"SELECT cur_name, available_amount FROM Currency GROUP BY cur_name")
-    return f"<p>Available currencies: {json.dumps(res)}</p>"  # Необхідно для нормального виводу даних.
+    return f"<p>Available currencies: {json.dumps(res)}</p>"
 
 
 @app.get("/currency/<currency_name>")
 def currency(currency_name):
+    """This function returns exact currency by it`s name.
+    Next commented out 7 lines is just an alternative and pretty(if I can say so) way to represent data."""
     # data_dict = {"Currency name": get_db_fetchone(f"SELECT cur_name FROM Currency WHERE cur_name = '{currency_name}'"),
     #              "Currency cost related to USD": get_db_fetchone(
     #                  f"SELECT relative_cost FROM Currency WHERE cur_name = '{currency_name}'"),
@@ -54,11 +67,14 @@ def currency(currency_name):
     #              "Last price update": get_db_fetchone(
     #                  f"SELECT cur_date FROM Currency WHERE cur_name = '{currency_name}'")}
     res = get_db_fetchall(f"SELECT * FROM Currency WHERE cur_name = '{currency_name}'")
-    return {"data": res, "status": "ok"}  # Необхідно для нормального виводу даних.
+    return {"data": res, "status": "ok"}
 
 
 @app.route("/currency/<currency_name>/rating", methods=["GET", "DELETE", "POST", "PUT"])
 def currency_review(currency_name):
+    """Every user(in theory) can leave a rating for every currency and it`s price on this platform.
+       By indicating currency name you can see it`s rating, post your rating and opinion or delete it
+       (Deleting option of course should be only managed by admin)."""
     if request.method == "GET":
         res = get_db_fetchall(
             f"SELECT cur_name AS 'Currency Name', round(avg(rating), 2) AS 'Rating' FROM Rating WHERE cur_name = '{currency_name}' GROUP BY cur_name")
@@ -82,6 +98,7 @@ def currency_review(currency_name):
 
 @app.get("/currency/trade/<currency_name_1>/<currency_name_2>")
 def course_ups1_to_ups2(currency_name_1, currency_name_2):
+    """This function returns relative cost of one currency to other one. From the first specified to the second one."""
     res = get_db_fetchall(f"""SELECT round(    
     (SELECT relative_cost FROM Currency WHERE cur_name='{currency_name_1}' and cur_date='{current_date}' ORDER BY cur_date DESC limit 1) /
     (SELECT relative_cost FROM Currency WHERE cur_name='{currency_name_2}' and cur_date='{current_date}' ORDER BY cur_date DESC limit 1), 2) as 'Latest exchange price'""")
@@ -90,6 +107,7 @@ def course_ups1_to_ups2(currency_name_1, currency_name_2):
 
 @app.post("/currency/trade/<currency_name_1>/<currency_name_2>")
 def exchange(currency_name_1, currency_name_2):
+    """This function makes exchange from first specified currency in the URL to second one."""
     user_id = 1
     amount1 = request.get_json()['amount']
     user_balance = get_db_fetchall(
@@ -132,23 +150,21 @@ def exchange(currency_name_1, currency_name_2):
 
 @app.get("/user")
 def all_user_info():
+    """The function returns from DB all user and info about them."""
     res = get_db_fetchall(f"SELECT user_id, name, login FROM User")
     return f"<p>Users: {res}</p>"
 
 
 @app.get("/user/<user_id>")
 def specific_user_info(user_id):
+    """The function returns from DB info about one specific user by id."""
     res = get_db_fetchall(f"SELECT name as 'Username', login as 'User login' FROM User WHERE user_id = '{user_id}'"),
     return f"<p>User info: {res}</p>"
 
 
-@app.post("/user/transfer")
-def transfer():
-    return "<p>Info about user transfer</p>"
-
-
 @app.get("/user/<user_id>/history")
 def user_history(user_id):
+    """The function returns from DB info and all done operations about one specific user by id."""
     data_dict = {"User name": get_db_fetchone(f"SELECT name FROM User WHERE user_id = '{user_id}'"),
                  "Operation number and date": get_db_fetchone(
                      f"SELECT  operation_id, datetime FROM Operation WHERE user='{user_id}'"),
@@ -159,6 +175,13 @@ def user_history(user_id):
                                                             f"FROM Operation join Currency WHERE Operation.user='{user_id}'"
                                                             f"and Operation.cur_to = Currency.cur_id")}
     return f"<p>{data_dict}</p>"
+
+
+# All the endpoints below was thought out and took place in whole application structure
+# but haven`t yet realized and non-functional.
+@app.post("/user/transfer")
+def transfer():
+    return "<p>Info about user transfer</p>"
 
 
 @app.route("/user/deposit", methods=["GET", "POST"])

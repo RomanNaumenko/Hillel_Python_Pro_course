@@ -1,0 +1,4 @@
+DELETE http://127.0.0.1:5000/currency/UAH/rating
+Content-Type: application/json
+
+

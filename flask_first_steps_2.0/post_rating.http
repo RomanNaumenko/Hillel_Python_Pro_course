@@ -1,0 +1,9 @@
+POST http://127.0.0.1:5000/currency/UAH/rating
+Content-Type: application/json
+
+{
+    "rating": 5,
+    "comment": "Good, pretty good"
+}
+
+

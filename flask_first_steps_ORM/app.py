@@ -15,8 +15,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_lite.db'
 db.init_app(app)  # DB initialization
 
 current_date = datetime.date.today().strftime("%Y-%m-%d")
-
-
 # The line above exists for a few database queries where exact indication of today's date is necessary.
 
 
@@ -54,7 +52,7 @@ def hello_world():
 
 @app.get("/currency")
 def currencies():
-    """Getting all currencies from DB and returning in JSON format."""
+    """Getting all currencies from DB."""
 
     result = Currency.query.all()
     return [itm.to_dict() for itm in result]
@@ -171,12 +169,15 @@ def all_user_info():
 @app.get("/user/<user_id>")
 def specific_user_info(user_id):
     """The function returns from DB info about one specific user by id."""
+
     result = User.query.filter_by(user_id=user_id).first()
     return f"User: {result.name}, login: {result.login}"
 
 
 @app.get("/user/<user_id>/history")
 def user_history(user_id):
+    """The function returns from DB info and all done operations about one specific user by id."""
+
     data_dict = {}
 
     res1 = User.query.filter_by(user_id=user_id).first()

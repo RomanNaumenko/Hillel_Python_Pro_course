@@ -163,6 +163,7 @@ def specific_user_info(user_id):
 @app.get("/user/<user_id>/history")
 def user_history(user_id):
     """The function returns from DB info and all done operations about one specific user by id."""
+
     data_dict = {"User name": get_db_fetchone(f"SELECT name FROM User WHERE user_id = '{user_id}'"),
                  "Operation number and date": get_db_fetchone(
                      f"SELECT  operation_id, datetime FROM Operation WHERE user='{user_id}'"),

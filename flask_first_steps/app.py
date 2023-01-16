@@ -1,7 +1,9 @@
 """This web-application was my first steps as web-development beginner.
    This app is sort of online currency exchanger with local database(DB). There is
    a few endpoints and functions that match them with a minimal for understanding
-   documentation and comments and also tools for testing as HTTP-request files."""
+   documentation and comments and also tools for testing as HTTP-request files.
+   Besides that you can see base web-application structure in png-file 'app_structure'.
+   Some functions or lines can be committed or unused but decided not to delete them."""
 
 from flask import Flask, request
 import json
@@ -11,8 +13,6 @@ import datetime
 app = Flask(__name__)
 
 current_date = datetime.date.today().strftime("%Y-%m-%d")
-
-
 # The line above exists for a few database queries where exact indication of today's date is necessary.
 
 

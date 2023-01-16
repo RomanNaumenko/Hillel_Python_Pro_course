@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  web:
+    environment:
+      DB_CONNECTION_STR: "postgresql://postgres:example@127.0.0.1:5432/postgres"
+    build: .
+    ports:
+      - "5000:5000"
+  db:
+    image: "postgres"
+    hostname: "pg"
+    container_name: "pg"
+    environment:
+      POSTGRES_PASSWORD: "example"
+    ports:
+      - "5432:5432"

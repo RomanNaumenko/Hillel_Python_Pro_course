@@ -1,0 +1,11 @@
+POST http://127.0.0.1:5000/currency/trade/UAH/USD
+Content-Type: application/json
+
+{
+  "data": {
+    "id_user_1": 1,
+    "id_user_2": 2,
+    "amount_currency_1": 100
+  },
+"status": "success"
+}

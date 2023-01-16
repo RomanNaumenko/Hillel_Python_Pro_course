@@ -13,6 +13,8 @@ import datetime
 app = Flask(__name__)
 
 current_date = datetime.date.today().strftime("%Y-%m-%d")
+
+
 # The line above exists for a few database queries where exact indication of today's date is necessary.
 
 
@@ -70,7 +72,7 @@ def currency(currency_name):
     return {"data": res, "status": "ok"}
 
 
-@app.route("/currency/<currency_name>/rating", methods=["GET", "DELETE", "POST", "PUT"])
+@app.route("/currency/<currency_name>/rating", methods=["GET", "DELETE", "POST"])
 def currency_review(currency_name):
     """Every user(in theory) can leave a rating for every currency and it`s price on this platform.
        By indicating currency name you can see it`s rating, post your rating and opinion or delete it
@@ -90,10 +92,6 @@ def currency_review(currency_name):
         get_db_fetchall(
             f"INSERT into Rating(cur_name, rating, comment) VALUES('{currency_name}', '{rating}','{comment}')")
         return f"<p>Ok!</p>"
-    elif request.method == "PUT":
-        return "<p>PUT</p>"
-    else:
-        return "<p>Method not allowed</p>"
 
 
 @app.get("/currency/trade/<currency_name_1>/<currency_name_2>")

@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  web:
+    environment:
+      DB_CONNECTION_STR: "postgresql://postgres:example@pg:5432/postgres"
+      RABBIT_CONNECTION_STR: "pyamqp://guest@rabbit"
+    build: .
+    ports:
+      - "5000:5000"
+    command: python3 app.py
+  db:
+    image: "postgres"
+    hostname: "pg"
+    container_name: "pg"
+    environment:
+      POSTGRES_PASSWORD: "example"
+    ports:
+      - "5432:5432"
+  rabbitmq:
+    image: "rabbitmq"
+    hostname: "rabbit"
+    container_name: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  celery_worker:
+    environment:
+      DB_CONNECTION_STR: "postgresql://postgres:example@pg:5432/postgres"
+      RABBIT_CONNECTION_STR: "pyamqp://guest@rabbit"
+    build: .
+    command: celery -A celery_worker worker -l info -P eventlet
+

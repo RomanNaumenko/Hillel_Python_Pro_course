@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Інформація щодо запитуваного маршруту</title>
+    <h1>Інформація щодо запитуваного маршруту</h1>
+</head>
+<body>
+    <form action="route_details" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for=start_point>Розташування початкової точки маршруту:{{start_point}}</label>
+        </div>
+        <div>
+            <label for=destination_point>Розташування кінцевої точки маршруту:{{ destination_point }}</label>
+        </div>
+        <div>
+            <label for=stop_point>Розташування точок зупинок:{{ stop_point }}</label>
+        </div>
+        <div>
+            <label for=country>Країна, в якій маршрут розташовується: {{ country }}</label>
+        </div>
+        <div>
+            <label for=loc>Локація:{{ loc }}</label>
+        </div>
+        <div>
+            <label for=desc>Опис маршруту: {{ desc }}</label>
+        </div>
+        <div>
+            <label for=route_type>Тип маршруту: {{ route_type }}</label>
+        </div>
+        <div>
+            <label for=duration>Тривалість: {{ duration }}</label>
+        </div>
+        <div>
+            <button><a href="http://127.0.0.1:8000/route/add_route">Add new route</a></button>
+        </div>
+        <div>
+            <h2>Закази стосовно цього маршруту:</h2>
+        <ul>
+            {% for m in event %}
+            <li>
+                <h1>Номер замовлення: {{ m.id }}</h1>
+                <p1>Номер маршруту: {{ m.id_route }}</p1><br>
+                <p1>Адмін: {{ m.event_admin }}</p1><br>
+                <p1>Клєнти, що вже підтвердженні: {{ m.approved_users }}</p1><br>
+                <p1>Клєнти, що очікують на підтвердження: {{ m.pending_users}}</p1><br>
+                <p1>Дата початку: {{ m.start_data}}</p1><br>
+                <p1>Ціна: {{ m.price}}</p1><br>
+
+            </li>
+            {% endfor %}
+        </ul></div>
+    </form>
+</body>
+</html>

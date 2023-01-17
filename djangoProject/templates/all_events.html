@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+            <h2>Закази маршрутів:</h2>
+        <ul>
+            {% for m in event %}
+            <li>
+                <h1>Номер замовлення: {{ m.id }}</h1>
+                <p1>Номер маршруту: {{ m.id_route }}</p1><br>
+                <p1>Адмін: {{ m.event_admin }}</p1><br>
+                <p1>Клєнти, що вже підтвердженні: {{ m.approved_users }}</p1><br>
+                <p1>Клєнти, що очікують на підтвердження: {{ m.pending_users}}</p1><br>
+                <p1>Дата початку: {{ m.start_data}}</p1><br>
+                <p1>Ціна: {{ m.price}}</p1><br>
+
+            </li>
+            {% endfor %}
+        </ul></div>>
+</body>
+</html>

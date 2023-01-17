@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Route addition</title>
+</head>
+<body>
+    <form action="add_route" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for=>start_point</label>
+            <input name="start_point" id="start_point" value="Hi" />
+        </div>
+        <div>
+            <label for=>destination_point</label>
+            <input name="destination_point" id="destination_point" value="Hi" />
+        </div>
+        <div>
+            <label for=>stop_points</label>
+            <textarea id="stop_points" name="stop_points" rows="4" cols="50">[{}]</textarea>
+        </div>
+        <div>
+            <label for=>country</label>
+            <input name="country" id="country" value="Hi" />
+        </div>
+        <div>
+            <label for=>loc</label>
+            <input name="loc" id="loc" value="Hi" />
+        </div>
+        <div>
+            <label for=>desc</label>
+            <input name="desc" id="desc" value="Hi" />
+        </div>
+        <div>
+            <label for=>route_type</label>
+            <input name="route_type" id="route_type" value="Hi" />
+        </div>
+        <div>
+            <label for=>duration</label>
+            <input name="duration" id="duration" value="Hi" />
+        </div>
+        <div>
+            <button>Accept this route</button>
+        </div>
+    </form>
+</body>
+</html>

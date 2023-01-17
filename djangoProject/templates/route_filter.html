@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Information about requested route</title>
+</head>
+<body>
+    <form action="?page=1" method="POST">
+        {% csrf_token %}
+
+        <div>
+            <label for=start_point>Знайденні маршрути за цими характеристиками:</label>
+        <ul>
+            {% for m in result %}
+            <li>
+                <h1>Маршрут номер {{ m.id }}</h1>
+                <p1>Початкова точка: {{ m.start_point }}</p1><br>
+                <p1>Точка закінчення: {{ m.destination_point }}</p1><br>
+                <p1>Країна: {{ m.country }}</p1><br>
+                <p1>Точки відпочинку(зупинки): {{ m.stop_point}}</p1><br>
+                <p1>Локація: {{ m.loc}}</p1><br>
+                <p1>Опис маршруту: {{ m.desc}}</p1><br>
+                <p1>Тип маршруту: {{ m.route_type}}</p1><br>
+                <p1>Тривалість маршруту: {{ m.duration}}</p1><br>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+        <div>
+            <button><a href="http://127.0.0.1:8000/route/add_route">Add new route</a></button>
+        </div>
+    </form>
+</body>
+</html>

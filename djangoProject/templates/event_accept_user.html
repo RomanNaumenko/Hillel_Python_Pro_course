@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Information about requested route</title>
+</head>
+<body>
+    <form action="accept_user" method="POST">
+        {% csrf_token %}
+        <h2>Надання дозволу користувачам</h2>
+        <h3>Користувачі, в яких вже є дозвіл на цей маршрут:</h3>
+        <ul>
+            {% for a in approved_users %}
+            <li>
+                <p1>Номер користувача: {{ a.id }}. </p1>
+                <p1>Ім'я користувача: {{ a.username }}.</p1><br>
+            </li>
+            {% endfor %}
+        </ul>
+            <h3>Користувачі, в яких ще нема дозвілу на цей маршрут:</h3>
+          <label for="accepting_user">Номер користувача: </label>
+          <select name="accepting_user" id="accepting_user">
+            {% for p in pending_users %}
+            <li>
+                <option value={{p.id}}>{{p.username}}</option>
+            </li>
+            {% endfor %}
+          </select>
+          <input type="submit" value="Надати дозвіл" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+[
+{
+    "model": "Coffee_night.review",
+    "pk": 1,
+    "fields": {
+        "id_route": 1,
+        "text": "That was perfect!",
+        "rating": 4
+    }
+},
+{
+    "model": "Coffee_night.review",
+    "pk": 2,
+    "fields": {
+        "id_route": 2,
+        "text": "I am completely pleased",
+        "rating": 5
+    }
+},
+{
+    "model": "Coffee_night.review",
+    "pk": 3,
+    "fields": {
+        "id_route": 1,
+        "text": "Bruh ... could be better",
+        "rating": 3
+    }
+},
+{
+    "model": "Coffee_night.review",
+    "pk": 4,
+    "fields": {
+        "id_route": 3,
+        "text": "Well, that was fascinating experience ",
+        "rating": 5
+    }
+},
+{
+    "model": "Coffee_night.review",
+    "pk": 5,
+    "fields": {
+        "id_route": 2,
+        "text": "Could not be better",
+        "rating": 5
+    }
+},
+    {
+        "model": "Coffee_night.review",
+        "pk": 6,
+        "fields": {
+            "id_route": 3,
+            "text": "Could be better",
+            "rating": 3
+        }
+    }
+]

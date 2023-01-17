@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Information about requested route</title>
+</head>
+<body>
+    <form action="route_review" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for=id_route>Номер маршруту: {{id_route}}</label>
+        </div>
+        <div>
+            <label for=text>Коментар щодо маршруту: {{ text }}</label>
+        </div>
+        <div>
+            <label for=distance>Рейтінг маршруту: {{ rating }}</label>
+        </div>
+    </form>
+</body>
+</html>

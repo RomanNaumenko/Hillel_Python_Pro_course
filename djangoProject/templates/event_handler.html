@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Information about requested route</title>
+</head>
+<body>
+    <form action="event_handler" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for=event_id>Номер замовлення: {{event_id}}</label>
+        </div>
+        <div>
+            <label for=start_point>Початкова точка маршруту: {{ start_point }}</label>
+        </div>
+        <div>
+            <label for=destination_point>Точка закінчення маршруту: {{ destination_point }}</label>
+        </div>
+        <div>
+            <label for=duration>Тривалість маршруту: {{ duration }}</label>
+        </div>
+        <div>
+            <label for=event_admin>Адмін: {{ event_admin }}</label>
+        </div>
+        <div>
+            <label for=approved_users> Клієнти, що вже підтвердженні: {{ approved_users }}</label>
+        </div>
+        <div>
+            <label for=pending_users>Клієнти, що очікують на підтвердження: {{ pending_users }}</label>
+        </div>
+        <div>
+            <label for=start_data>Дата початку: {{ start_data }}</label>
+        </div>
+        <div>
+            <label for=price>Ціна: {{ price }}</label>
+        </div>
+    </form>
+</body>
+</html>

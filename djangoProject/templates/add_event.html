@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Route addition</title>
+</head>
+<body>
+    <form action="add_event" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for=>event_date</label>
+            <input type="date" id="event_date" name="event_date" value={{start_date}} min="2020-01-01" max="2024-01-01"/>
+        </div>
+        <div>
+            <label for=>price</label>
+            <input name="price" id="price" value="1000" />
+        </div>
+        <div>
+            <button>Accept this event</button>
+        </div>
+    </form>
+
+
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+[
+{
+    "model": "Coffee_night.route",
+    "pk": 1,
+    "fields": {
+        "start_point": 1,
+        "stop_point": "636cf38789f593904b234a2f",
+        "destination_point": 3,
+        "country": "Ukraine",
+        "loc": "Lviv",
+        "desc": "Very interesting information about Lviv and about walking",
+        "route_type": "HIKING",
+        "duration": 1
+    }
+},
+{
+    "model": "Coffee_night.route",
+    "pk": 2,
+    "fields": {
+        "start_point": 1,
+        "stop_point": "636cf398569c93af2d99583c",
+        "destination_point": 2,
+        "country": "Ukraine",
+        "loc": "Carpathians",
+        "desc": "Very pleasant and chilling mount advanture",
+        "route_type": "MOUNTAIN_CLIMBING",
+        "duration": 3
+    }
+},
+{
+    "model": "Coffee_night.route",
+    "pk": 3,
+    "fields": {
+        "start_point": 3,
+        "stop_point": "636cf39a0de02dbdec77f43d",
+        "destination_point": 2,
+        "country": "Ukraine",
+        "loc": "Vinnytsia",
+        "desc": "Extreme fishing, who would has thought? ",
+        "route_type": "FISHING",
+        "duration": 3
+    }
+},
+{
+    "model": "Coffee_night.route",
+    "pk": 4,
+    "fields": {
+        "start_point": 2,
+        "stop_point": "636cf39b4ac825f40b6c04cd",
+        "destination_point": 4,
+        "country": "Ukraine",
+        "loc": "Lviv",
+        "desc": "Sightseeing as usual",
+        "route_type": "SIGHTSEEING",
+        "duration": 3
+    }
+},
+{
+    "model": "Coffee_night.route",
+    "pk": 5,
+    "fields": {
+        "start_point": 2,
+        "stop_point": "636cf39c5992df5573157802",
+        "destination_point": 4,
+        "country": "Ukraine",
+        "loc": "Lviv",
+        "desc": "Excursion at the Chocolate factory",
+        "route_type": "OTHER",
+        "duration": 3
+    }
+},
+{
+    "model": "Coffee_night.route",
+    "pk": 6,
+    "fields": {
+        "start_point": 4,
+        "stop_point": "636cf39dc88348da3b799e22",
+        "destination_point": 3,
+        "country": "Ukraine",
+        "loc": "West",
+        "desc": "Nothing special",
+        "route_type": "HIKING",
+        "duration": 3
+    }
+}
+]

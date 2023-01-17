@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    container_name: shortener_web
+    restart: always
+    ports:
+        - "80:8080"
+    command: python main_app.py
+
+  tbot:
+    build: .
+    env_file:
+      - .env
+    container_name: shortener_bot
+    restart: always
+    command: python bot.py
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    hostname: mongodb
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: admin
+        MONGO_INITDB_ROOT_PASSWORD: admin
+        MONGO_INITDB_DATABASE: async_db
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+

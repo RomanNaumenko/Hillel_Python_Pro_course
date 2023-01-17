@@ -1,4 +1,4 @@
-"""This newest version of previous web currency exchanger with ORM integrated.
+"""This is modified version of first version of this web currency exchanger with ORM integrated.
    Used sqlalchemy. Also created 'models.py' where all models for DB interaction are located.
    Project structure are the same."""
 
